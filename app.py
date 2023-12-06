@@ -17,8 +17,7 @@ with st.sidebar:
 tab1,tab2 = st.tabs(['Home','Debug'])
 
 with tab1:
-    match st.session_state['menu']:
-        case 'Upgrade Downgrade Kamar':
+    if st.session_state['menu'] == 'Upgrade Downgrade Kamar':
             st.subheader("Perhitungan Upgrade Downgrade Kamar [Maestro Optima Care](https://asuransimurni.com/produk/asuransi-kesehatan/maestro-optima-care/)")
             st.write("Menu ini bertujuan untuk menghitung estimasi biaya tagihan Rumah Sakit yang excess diakibatkan oleh upgrade kamar.")
             st.write("Saat ini hanya berlaku khusus nasabah Maestro Optima Care dengan Plan Emerald.")
@@ -47,9 +46,9 @@ with tab1:
                         st.write("Estimasi Total Tagihan Rumah Sakit: {:,} (100%)".format(st.session_state['cur_tagihan_rs']))
                         st.write(":white_check_mark: Estimasi Total Billing yang dicover Asuransi: {:,} ({}%)".format(st.session_state['cur_tagihan_rs_moc_paid'],st.session_state['%_moc_paid']))
                         st.write(":exclamation: Estimasi Total Billing yang dicover diri sendiri: {:,} ({}%)".format(st.session_state['cur_tagihan_self_paid'],st.session_state['%_self_paid']))
-        case 'Download Area':
-            st.write("Coming soon")
-        case _:
-            st.subheader("Kamu belum memilih menu")
+    elif st.session_state['menu'] == 'Download Area':
+        st.write("Coming soon")
+    else:
+        st.subheader("Kamu belum memilih menu")
 with tab2:
     st.session_state

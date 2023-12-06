@@ -12,7 +12,7 @@ init_state(init_sessions=['cur_kamar_increment'
 with st.sidebar:
     st.title("[Asuransimurni.com](https://Asuransimurni.com) Tools")
     st.write("Membantu nasabah dalam mendapatkan informasi terkait Klaim maupun Administrasi terkait Asuransi AXA Financial Indonesia.")
-    st.selectbox("Menu",['Upgrade Downgrade Kamar'],key='menu')
+    st.selectbox("Menu",['Upgrade Downgrade Kamar','Download Area'],key='menu')
 
 tab1,tab2 = st.tabs(['Home','Debug'])
 
@@ -47,7 +47,8 @@ with tab1:
                         st.write("Estimasi Total Tagihan Rumah Sakit: {:,} (100%)".format(st.session_state['cur_tagihan_rs']))
                         st.write(":white_check_mark: Estimasi Total Billing yang dicover Asuransi: {:,} ({}%)".format(st.session_state['cur_tagihan_rs_moc_paid'],st.session_state['%_moc_paid']))
                         st.write(":exclamation: Estimasi Total Billing yang dicover diri sendiri: {:,} ({}%)".format(st.session_state['cur_tagihan_self_paid'],st.session_state['%_self_paid']))
-
+        case 'Download Area':
+            st.write("Coming soon")
         case _:
             st.subheader("Kamu belum memilih menu")
 with tab2:

@@ -9,11 +9,14 @@ init_state(init_sessions=['cur_kamar_increment'
                           ,'%_moc_paid'
                           ,'%_self_paid'
                           ,'max_harga_kamar'])
+menunya = ['Upgrade Downgrade Kamar'
+           ,'Download Formulir Klaim'
+           ,'Pertanyaan Kesehatan MOC']
 
 with st.sidebar:
     st.title("[Asuransimurni.com](https://Asuransimurni.com) Tools")
     st.write("Membantu nasabah dalam mendapatkan informasi terkait Klaim maupun Administrasi terkait Asuransi AXA Financial Indonesia.")
-    st.selectbox("Menu",['Upgrade Downgrade Kamar','Download Area'],key='menu')
+    st.selectbox("Menu",menunya,key='menu')
     col1,col2,col3 = st.columns(3)
     with col1:
         st.write("[Website](https://asuransimurni.com)")
@@ -56,9 +59,12 @@ with tab1:
                         st.write("Estimasi Total Tagihan Rumah Sakit: {:,} (100%)".format(st.session_state['cur_tagihan_rs']))
                         st.write(":white_check_mark: Estimasi Total Billing yang dicover Asuransi: {:,} ({}%)".format(st.session_state['cur_tagihan_rs_moc_paid'],st.session_state['%_moc_paid']))
                         st.write(":exclamation: Estimasi Total Billing yang dicover diri sendiri: {:,} ({}%)".format(st.session_state['cur_tagihan_self_paid'],st.session_state['%_self_paid']))
-    elif st.session_state['menu'] == 'Download Area':
-        st.write("Coming soon")
+    
+    elif st.session_state['menu'] == 'Download Formulir Klaim':
+        st.write("Formulir Klaim dapat diunduh melalui tautan [berikut ini](https://lookerstudio.google.com/reporting/1687e67d-6dbe-4bac-bacd-988cf433bebe/page/NpqcD)")
+    
+    elif st.session_state['menu'] == 'Pertanyaan'
     else:
-        st.subheader("Kamu belum memilih menu")
+        st.subheader("Coming soon.")
 with tab2:
     st.session_state

@@ -10,6 +10,8 @@ init_state(init_sessions=['cur_kamar_increment'
                           ,'%_self_paid'
                           ,'max_harga_kamar'
                           ,'eligible_moc_score'])
+init_state(['check_eligible_usia','check_eligible_penyakit','check_eligible_rutin'],valuenya=False)
+
 menunya = ['Upgrade Downgrade Kamar'
            ,'Download Formulir Klaim'
            ,'Pertanyaan Kesehatan MOC']

@@ -8,10 +8,32 @@ init_state(init_sessions=['cur_kamar_increment'
                           ,'cur_jumlah_hari'
                           ,'%_moc_paid'
                           ,'%_self_paid'
-                          ,'max_harga_kamar'])
+                          ,'max_harga_kamar'
+                          ,'eligible_moc_score'])
 menunya = ['Upgrade Downgrade Kamar'
            ,'Download Formulir Klaim'
            ,'Pertanyaan Kesehatan MOC']
+
+
+penyakit_eligible_moc = [
+    'Kanker'
+    ,'Hepatitis B'
+    ,'Hepatitis C'
+    ,'Diabetes'
+    ,'Penyakit Jantung'
+    ,'Gagal Ginjal'
+    ,'Hipertensi'
+    ,'Penyakit Paru Obstruktif Kronis'
+    ,'Sirosis Hati / Liver'
+    ,'Stroke'
+    ,'Tidak ada'
+
+]
+
+obat_rutin_eligible_moc = [
+    'Ya'
+    ,'Tidak'
+]
 
 with st.sidebar:
     st.title("[Asuransimurni.com](https://Asuransimurni.com) Tools")
@@ -64,7 +86,16 @@ with tab1:
         st.write("Formulir Klaim dapat diunduh melalui tautan [berikut ini](https://lookerstudio.google.com/reporting/1687e67d-6dbe-4bac-bacd-988cf433bebe/page/NpqcD)")
     
     elif st.session_state['menu'] == 'Pertanyaan Kesehatan MOC':
-        st.write("Coming soon")
+        st.subheader("Pertanyaan Kesehatan [Maestro Optima Care](https://asuransimurni.com/produk/asuransi-kesehatan/maestro-optima-care/)")
+        st.write("Tools ini bertujuan untuk mengetahui apakah anda eligible untuk membeli Asuransi Kesehatan Maestro Optima Care.")
+        st.number_input("1. Masukkan Usia (tahun)",min_value=1,on_change=calc_eligible_moc,key='eligible_usia')
+        st.radio("2. Apakah pernah terdiagnosa penyakit di bawah ini?",penyakit_eligible_moc,on_change=calc_eligible_moc,index=10,key='eligible_penyakit')
+        st.radio("3. Apakah saat ini sedang konsumsi obat/rawat jalan / kontrol dokter secara rutin",obat_rutin_eligible_moc,on_change=calc_eligible_moc,index=1,key='eligible_rutin')
+        if st.button("Cek Eligible",'eligible_button'):
+            if st.session_state['check_eligible_usia'] and st.session_state['check_eligible_penyakit'] and st.session_state['check_eligible_rutin']:
+                st.write(":white_check_mark: Anda lulus dan diperkenankan membeli Asuransi Kesehatan Maestro Optima Care. Hubungi [agen](https://asuransimurni.com/produk/asuransi-kesehatan/maestro-optima-care/) sekarang.")
+            else:
+                st.write(":exclamation: Mohon maaf anda tidak diperkenankan untuk membeli Asuransi Kesehatan Maestro Optima Care.")
     else:
         st.subheader("Coming soon.")
 with tab2:

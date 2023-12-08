@@ -63,7 +63,8 @@ with tab1:
     elif st.session_state['menu'] == 'Download Formulir Klaim':
         st.write("Formulir Klaim dapat diunduh melalui tautan [berikut ini](https://lookerstudio.google.com/reporting/1687e67d-6dbe-4bac-bacd-988cf433bebe/page/NpqcD)")
     
-    elif st.session_state['menu'] == 'Pertanyaan'
+    elif st.session_state['menu'] == 'Pertanyaan Kesehatan MOC':
+        st.write("Coming soon")
     else:
         st.subheader("Coming soon.")
 with tab2:

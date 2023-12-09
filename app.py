@@ -12,9 +12,18 @@ init_state(init_sessions=['cur_kamar_increment'
                           ,'eligible_moc_score'])
 init_state(['check_eligible_usia','check_eligible_penyakit','check_eligible_rutin'],valuenya=True)
 
+linknya = {
+    'moc':'https://asuransimurni.com/produk/asuransi-kesehatan/maestro-optima-care/',
+    'website':'https://asuransimurni.com',
+    'linkedin':'https://www.linkedin.com/in/nencor',
+    'twitter':'https://twitter.com/asmurcom',
+    'looker':'https://lookerstudio.google.com/reporting/1687e67d-6dbe-4bac-bacd-988cf433bebe/page/NpqcD',
+    'foto':'https://pbs.twimg.com/profile_images/1638728562814640129/s902CLPl_400x400.jpg'
+}
 menunya = ['Upgrade Downgrade Kamar'
-           ,'Download Formulir Klaim'
-           ,'Pertanyaan Kesehatan MOC']
+        ,'Download Formulir Klaim'
+        ,'Pertanyaan Kesehatan MOC'
+        ,'Klaim Reimbursement MOC']
 
 
 penyakit_eligible_moc = [
@@ -41,19 +50,12 @@ with st.sidebar:
     st.title("[Asuransimurni.com](https://Asuransimurni.com) Tools")
     st.write("Membantu nasabah dalam mendapatkan informasi terkait Klaim maupun Administrasi terkait Asuransi AXA Financial Indonesia.")
     st.selectbox("Menu",menunya,key='menu')
-    col1,col2,col3 = st.columns(3)
-    with col1:
-        st.write("[Website](https://asuransimurni.com)")
-    with col2:
-        st.write("[Linkedin](https://www.linkedin.com/in/nencor)")
-    with col3:
-        st.write("[Twitter](https://twitter.com/asmurcom)")
 
 tab1,tab2 = st.tabs(['Home','Debug'])
 
 with tab1:
     if st.session_state['menu'] == 'Upgrade Downgrade Kamar':
-            st.subheader("Perhitungan Upgrade Downgrade Kamar [Maestro Optima Care](https://asuransimurni.com/produk/asuransi-kesehatan/maestro-optima-care/)")
+            st.subheader("Perhitungan Upgrade Downgrade Kamar [Maestro Optima Care]({})".format(linknya['moc']))
             st.write("Menu ini bertujuan untuk menghitung estimasi biaya tagihan Rumah Sakit yang excess diakibatkan oleh upgrade kamar.")
             st.selectbox("Plan saat ini",config_kamar.keys(),index=2,key='cur_plan')
             st.selectbox("Berobat di",['Indonesia','Luar Indonesia'],index=0,key='cur_negara')
@@ -85,7 +87,7 @@ with tab1:
                         st.write(":exclamation: Estimasi Total Billing yang dicover diri sendiri: {:,} ({}%)".format(st.session_state['cur_tagihan_self_paid'],st.session_state['%_self_paid']))
     
     elif st.session_state['menu'] == 'Download Formulir Klaim':
-        st.write("Formulir Klaim dapat diunduh melalui tautan [berikut ini](https://lookerstudio.google.com/reporting/1687e67d-6dbe-4bac-bacd-988cf433bebe/page/NpqcD)")
+        st.write("Formulir Klaim dapat diunduh melalui tautan [berikut ini]({})".format(linknya['looker']))
     
     elif st.session_state['menu'] == 'Pertanyaan Kesehatan MOC':
         st.subheader("Pertanyaan Kesehatan [Maestro Optima Care](https://asuransimurni.com/produk/asuransi-kesehatan/maestro-optima-care/)")
@@ -95,9 +97,13 @@ with tab1:
         st.radio("3. Apakah saat ini sedang konsumsi obat/rawat jalan / kontrol dokter secara rutin",obat_rutin_eligible_moc,on_change=calc_eligible_moc,index=1,key='eligible_rutin')
         if st.button("Cek Eligible",'eligible_button'):
             if st.session_state['check_eligible_usia'] and st.session_state['check_eligible_penyakit'] and st.session_state['check_eligible_rutin']:
-                st.write(":white_check_mark: Anda lulus dan diperkenankan membeli Asuransi Kesehatan Maestro Optima Care. Hubungi [agen](https://asuransimurni.com/produk/asuransi-kesehatan/maestro-optima-care/) sekarang.")
+                st.success(":white_check_mark: Anda lulus dan diperkenankan membeli Asuransi Kesehatan Maestro Optima Care. Hubungi [agen](https://asuransimurni.com/produk/asuransi-kesehatan/maestro-optima-care/) sekarang.")
             else:
-                st.write(":exclamation: Mohon maaf anda tidak diperkenankan untuk membeli Asuransi Kesehatan Maestro Optima Care.")
+                st.error(":exclamation: Mohon maaf anda tidak diperkenankan untuk membeli Asuransi Kesehatan Maestro Optima Care.")
+    elif st.session_state['menu'] == 'Klaim Reimbursement MOC':
+        st.subheader("Klaim Reimbursement [Maestro Optima Care]({})".format(linknya['moc']))
+        st.write("Menu ini bertujuan untuk melakukan verifikasi apakah dokumen Klaim sudah lengkap sebelum dikirim")
+        st.write("Coming soon")
     else:
         st.subheader("Coming soon.")
 with tab2:

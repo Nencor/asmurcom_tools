@@ -19,7 +19,6 @@ Daerah Khusus Ibukota Jakarta 10110""",
 
 checkbox_kurir = ['JNE','JNT','TIKI','POS Indonesia','SAP','SiCepat','JET']
 menunya = ['Upgrade Downgrade Kamar'
-        ,'Download Formulir Klaim'
         ,'Pertanyaan Kesehatan MOC'
         ,'Klaim Reimbursement MOC']
 
@@ -133,9 +132,6 @@ with tab1:
                         st.write("Estimasi Total Tagihan Rumah Sakit: {:,} (100%)".format(st.session_state['cur_tagihan_rs']))
                         st.write(":white_check_mark: Estimasi Total Billing yang dicover Asuransi: {:,} ({}%)".format(st.session_state['cur_tagihan_rs_moc_paid'],st.session_state['%_moc_paid']))
                         st.write(":exclamation: Estimasi Total Billing yang dicover diri sendiri: {:,} ({}%)".format(st.session_state['cur_tagihan_self_paid'],st.session_state['%_self_paid']))
-    
-    elif st.session_state['menu'] == 'Download Formulir Klaim':
-        st.write("Formulir Klaim dapat diunduh melalui tautan [berikut ini]({})".format(linknya['looker']))
     
     elif st.session_state['menu'] == 'Pertanyaan Kesehatan MOC':
         st.subheader("Pertanyaan Kesehatan [Maestro Optima Care](https://asuransimurni.com/produk/asuransi-kesehatan/maestro-optima-care/)")

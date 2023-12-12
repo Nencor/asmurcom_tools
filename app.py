@@ -95,7 +95,7 @@ obat_rutin_eligible_moc = [
 with st.sidebar:
     st.title("[Asuransimurni.com](https://Asuransimurni.com) Tools")
     st.write("Membantu nasabah dalam mendapatkan informasi terkait Klaim maupun Administrasi terkait Asuransi AXA Financial Indonesia.")
-    st.selectbox("Menu",menunya,key='menu')
+    st.selectbox("Menu",menunya,key='menu',on_change=reset_state)
     st.write(f"[Butuh bantuan?]({linknya['whatsapp']})")
 
 tab1,tab2 = st.tabs(['Home','Debug'])

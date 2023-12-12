@@ -46,9 +46,9 @@ def reset_state():
                           ,'progress_value'
                           ,'klaim_no_polis'
                           ,'klaim_kurir'])
-init_state(['check_eligible_usia'
-            ,'check_eligible_penyakit'
-            ,'check_eligible_rutin'],valuenya=True)
+    init_state(['check_eligible_usia'
+                ,'check_eligible_penyakit'
+                ,'check_eligible_rutin'],valuenya=True)
 
 def calc_kamar():
     st.session_state['max_harga_kamar'] = st.session_state['cur_kamar_rs'] if st.session_state['cur_kamar_rs'] >= config_kamar[st.session_state['cur_plan']]['harga_kamar'] else config_kamar[st.session_state['cur_plan']]['harga_kamar']

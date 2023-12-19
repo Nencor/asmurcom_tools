@@ -14,14 +14,22 @@ linknya = {
 Lantai 3, Jl. Medan Merdeka Sel. No.12, RT.11/RW.2
 Gambir, Kecamatan Gambir, Kota Jakarta Pusat, 
 Daerah Khusus Ibukota Jakarta 10110""",
-    'whatsapp':'https://wa.me/6281210429617'
+    'whatsapp':'https://wa.me/6281210429617',
+    'slides_registrasi_cc':'https://docs.google.com/presentation/d/1l8m4sUkflWh-drK_8hPZEztcC_DxU8UHZAtVJe5NX80/edit?usp=sharing',
+    'slides_registrasi_bca':'https://docs.google.com/presentation/d/1XXwcnyPMDlcgpgfiM2hq1Y7eEB_atuFhhzMbcIX9p64/edit?usp=sharing'
+
 }
 
 checkbox_kurir = ['JNE','JNT','TIKI','POS Indonesia','SAP','SiCepat','JET']
 menunya = ['Upgrade Downgrade Kamar'
         ,'Pertanyaan Kesehatan MOC'
-        ,'Klaim Reimbursement MOC']
+        ,'Klaim Reimbursement MOC'
+        ,'Daftar Autodebet Credit Card / BCA']
 
+autodebetnya = [
+    'Rekening BCA',
+    'Kartu Kredit (AMEX, VISA, MASTERCARD)'
+]
 kelengkapan_klaim = {
     'suket_dokter':{
         'name':'[Surat Keterangan Dokter]({})'.format(linknya['looker']),
@@ -174,6 +182,21 @@ with tab1:
                     st.markdown(f"[Kirim Nomor Resi via Whatsapp](https://api.whatsapp.com/send/?phone={linknya['whatsapp']}&text=dokumen%20klaim%20nomor%20polis%20{st.session_state['klaim_no_polis']}%20telah%20dikirim%20menggunakan%20{str(st.session_state['klaim_kurir']).replace(' ','%20') }%20dengan%20nomor%20resi%20{st.session_state['klaim_resi']}&type=phone_number&app_absent=0)")
                 else:
                     st.error("Lengkapi Nomor Polis / Nomor Resi terlebih dahulu untuk mengirimkan nomor resi pengiriman via Whatsapp.")
+    elif st.session_state['menu'] == 'Daftar Autodebet Credit Card / BCA':
+        st.subheader("Daftar Autodebet")
+        st.write("Menu ini digunakan untuk memandu nasabah dalam melakukan pendaftaran autodebet secara _self service_")
+        st.selectbox("Pilih metode autodebet",autodebetnya,index=0,key="autodebetnya")
+        
+        match st.session_state['autodebetnya']:
+            case 'Rekening BCA':
+                st.write(f"Panduan registrasi autodebet Rekening BCA dapat dilihat pada tautan [berikut ini]({linknya['slides_registrasi_bca']}']).")
+            case 'Kartu Kredit (AMEX, VISA, MASTERCARD)':
+                st.write(f"Panduan registrasi autodebet Kartu Kredit dapat dilihat pada tautan [berikut ini]({linknya['slides_registrasi_cc']}).")
+            case _:
+                st.write("Pilih metode autodebet terlebih dahulu")
+
+    else:
+        st.subheader("Coming soon")
                     
 with tab2:
     st.session_state

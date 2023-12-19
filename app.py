@@ -187,13 +187,12 @@ with tab1:
         st.write("Menu ini digunakan untuk memandu nasabah dalam melakukan pendaftaran autodebet secara _self service_")
         st.selectbox("Pilih metode autodebet",autodebetnya,index=0,key="autodebetnya")
         
-        match st.session_state['autodebetnya']:
-            case 'Rekening BCA':
-                st.write(f"Panduan registrasi autodebet Rekening BCA dapat dilihat pada tautan [berikut ini]({linknya['slides_registrasi_bca']}']).")
-            case 'Kartu Kredit (AMEX, VISA, MASTERCARD)':
-                st.write(f"Panduan registrasi autodebet Kartu Kredit dapat dilihat pada tautan [berikut ini]({linknya['slides_registrasi_cc']}).")
-            case _:
-                st.write("Pilih metode autodebet terlebih dahulu")
+        if st.session_state['autodebetnya'] == 'Rekening BCA':
+            st.write(f"Panduan registrasi autodebet Rekening BCA dapat dilihat pada tautan [berikut ini]({linknya['slides_registrasi_bca']}']).")
+        elif st.session_state['autodebetnya'] == 'Kartu Kredit (AMEX, VISA, MASTERCARD)':
+            st.write(f"Panduan registrasi autodebet Kartu Kredit dapat dilihat pada tautan [berikut ini]({linknya['slides_registrasi_cc']}).")
+        else:
+            st.write("Pilih metode autodebet terlebih dahulu")
 
     else:
         st.subheader("Coming soon")
